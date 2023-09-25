@@ -20,7 +20,17 @@ public class App extends Application {
 
         EventHandler<ActionEvent> manejador = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
-                cajaTexto.setText(cajaTexto.getText().toUpperCase());
+                Button boton = (Button) e.getSource();
+                if (boton.getText().equals("Mayúscula")) {
+                    cajaTexto.setText(cajaTexto.getText().toUpperCase());
+                    boton.setText("Minúscula");
+                } else {
+                    cajaTexto.setText(cajaTexto.getText().toLowerCase());
+                    boton.setText("Mayúscula");
+                }
+
+                
+
             }
         };
         boton.setOnAction(manejador);
