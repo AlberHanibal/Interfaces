@@ -14,10 +14,12 @@ import javafx.event.ActionEvent;
 
 public class App extends Application {
 
+    private Controlador c;
 
     @Override
     public void start(Stage primera) throws Exception {
 
+        c = new Controlador();
         HBox root = new HBox();
         TextField palabra = new TextField();
         TextArea texto = new TextArea();
