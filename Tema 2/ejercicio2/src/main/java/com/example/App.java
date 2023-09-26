@@ -28,9 +28,6 @@ public class App extends Application {
                     cajaTexto.setText(cajaTexto.getText().toLowerCase());
                     boton.setText("Mayúscula");
                 }
-
-                
-
             }
         };
         boton.setOnAction(manejador);
