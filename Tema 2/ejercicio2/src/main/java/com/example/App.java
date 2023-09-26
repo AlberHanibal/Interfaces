@@ -11,21 +11,27 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private controlador c;
+
     @Override
     public void start(Stage primera) throws Exception {
 
+        c = new controlador();
         HBox root = new HBox();
         TextField cajaTexto = new TextField();
         Button boton = new Button("Mayúscula");
 
         EventHandler<ActionEvent> manejador = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
+                String salida;
                 Button boton = (Button) e.getSource();
                 if (boton.getText().equals("Mayúscula")) {
-                    cajaTexto.setText(cajaTexto.getText().toUpperCase());
+                    salida = c.convierteAMayus(cajaTexto.getText());
+                    cajaTexto.setText(salida);
                     boton.setText("Minúscula");
                 } else {
-                    cajaTexto.setText(cajaTexto.getText().toLowerCase());
+                    salida = c.convierteAMinus(cajaTexto.getText());
+                    cajaTexto.setText(salida);
                     boton.setText("Mayúscula");
                 }
             }
