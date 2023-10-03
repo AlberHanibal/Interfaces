@@ -2,30 +2,30 @@ package com.example;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
-
-import javafx.scene.control.TextArea;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 public class Controlador {
     
-    public void mostrarFichero(File fichero, TextArea contenidoFichero) {
-        //File fichero = new File(nombreFichero);
-        System.out.println(fichero.getAbsolutePath());
-        System.out.println(fichero);
-        Scanner sc = null;
-        //if (fichero.exists()) {
-            try {
-                System.out.println("entra");
-                sc = new Scanner(fichero);
-                String texto = "";
-                while(sc.hasNextLine()) {
-                    texto = texto + sc.nextLine();
-                }
-                contenidoFichero.setText(texto);
-                
-            } catch (IOException ex) {
-                System.out.println("Error con el fichero " + ex.getMessage());
-            }
-        //}
+    public String leerFichero(File fichero) {
+        String texto = "";
+        try {
+            texto = Files.readString(Path.of(fichero.getAbsolutePath()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return texto;
+    }
+
+    public void escribirFichero(File fichero, String texto) {
+        try {
+            fichero.createNewFile();
+            Path filepath = Path.of(fichero.getAbsolutePath());
+            Files.writeString(filepath, texto, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 }
