@@ -27,10 +27,9 @@ public class App extends Application {
     private final String [] etiquetas = {"Leído", "Pendiente", "Favorito"};
     @Override
     public void start(Stage primera) throws Exception {
-//datos : t´ıtulo, autor, genero y etiquetas
-// generos: Novela, Ensayo, Art´ıculo y Docencia
+
         c = new Controlador();
-        VBox formulario = new VBox();
+        VBox formulario = new VBox(15);
 
         HBox lineaTitulo = new HBox();
         Label textoTitulo = new Label("Título");
@@ -42,15 +41,16 @@ public class App extends Application {
         TextField cajaAutor = new TextField();
         lineaAutor.getChildren().addAll(textoAutor, cajaAutor);
 
-        HBox lineaGenero = new HBox();
+        HBox lineaGenero = new HBox(5);
         ToggleGroup opcionesGenero = new ToggleGroup();
         for (String genero : generos) {
             RadioButton r = new RadioButton(genero);
+            r.setUserData(new String(genero));
             r.setToggleGroup(opcionesGenero);
             lineaGenero.getChildren().add(r);
         }
 
-        HBox lineaEtiquetas = new HBox();
+        HBox lineaEtiquetas = new HBox(5);
         for (String etiqueta : etiquetas) {
             CheckBox c = new CheckBox(etiqueta);
             lineaEtiquetas.getChildren().add(c);
@@ -65,10 +65,11 @@ public class App extends Application {
                     if (c.isSelected()) {
                         textoEtiquetas+= c.getText() + ",";
                     }
-                    // quitar el último ,
-                    // falla el string del radio
                 }
-                Libro libro = new Libro(cajaTitulo.getText(), cajaAutor.getText(), opcionesGenero.getSelectedToggle().toString(), textoEtiquetas);
+                if (!textoEtiquetas.equals("")) {
+                    textoEtiquetas = textoEtiquetas.substring(0, textoEtiquetas.length() - 1);
+                }
+                Libro libro = new Libro(cajaTitulo.getText(), cajaAutor.getText(), (String)opcionesGenero.getSelectedToggle().getUserData(), textoEtiquetas);
                 System.out.println(libro.toString());
                 FileChooser fileChooser = new FileChooser();
                 File fichero = fileChooser.showOpenDialog(primera);
