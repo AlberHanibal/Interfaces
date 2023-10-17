@@ -32,6 +32,7 @@
 - Que resalte para que se sepa que es menú
 ### Col izq
 - Filtrado
+    - Como almacenar los títulos de las notas con su nombre de fichero
     - Detectar teclado y filtrar
 - Listado
     - onClick para mostrar nota
@@ -44,7 +45,7 @@
 #### Cosas a mirar
 - Cuando se de a borrar se ponga la app modo borrado y en el listado a la derecha un icono de borrar, que se siga pudiendo ver notas
 - Cuando se de a modificar se ponga la app modo modificar, igual de lo de arriba
-
+- Si hay css poder seleccionar varios borrados a la vez haciendo unos bordes
 
 
 
