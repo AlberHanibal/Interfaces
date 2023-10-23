@@ -4,9 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Nota {
     
@@ -45,14 +50,12 @@ public class Nota {
         return fechaCreacion;
     }
 
-    //cambiar a privado cuando se pruebe
-    public String formatearFecha() {
+    private String formatearFecha() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyHHmmss");
         return this.getFechaCreacion().format(formato);
     }
 
-    //cambiar a privado cuando se pruebe, me pone una T
-    public LocalDateTime desFormatearFecha(String fechaFormateada) {
+    private static LocalDateTime desFormatearFecha(String fechaFormateada) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyHHmmss");
         LocalDateTime fechaSinFormato = LocalDateTime.parse(fechaFormateada, formato);
         System.out.println(fechaSinFormato);
@@ -75,20 +78,29 @@ public class Nota {
         }
     }
 
-    public Nota leerNota(String nombreFichero) {
+    public static Nota leerNota(String nombreFichero) {
         try {
-            BufferedReader notaCompleta = new BufferedReader(new FileReader(nombreFichero));
-
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            File fichero = new File(nombreFichero);
+            BufferedReader notaCompleta = new BufferedReader(new FileReader(fichero));
+            String lineaTitulo = notaCompleta.readLine();
+            String titulo = lineaTitulo.split("título:")[1];
+            String lineaCategoria = notaCompleta.readLine();
+            String categoria = lineaCategoria.split("categoría:")[1];
+            notaCompleta.readLine();
+            notaCompleta.readLine();
+            String lineaContenido;
+            String contenido = "";
+            while ((lineaContenido = notaCompleta.readLine()) != null) {
+                contenido += lineaContenido + "\n";
+            }
+            notaCompleta.close();
+            String fechaCreacion = nombreFichero.split(".txt")[0];
+            return new Nota(titulo, categoria, contenido, desFormatearFecha(fechaCreacion));            
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
-
-
-
         return null;
     }
-
-
 
     @Override
     public String toString() {
@@ -96,6 +108,4 @@ public class Nota {
                 + formatearFecha() + "]";
     }
 
-    
-    
 }

@@ -2,15 +2,12 @@
 
 ## Clase nota
 -----------
-- Pegarse con las fechas
-    - Crear formato de nombre del fichero
-- Crear nota leyendola de fichero
-    - usar regex
-- Crear nota de 0
+- Leer directorio para sacar listadoNotas
 - Modificar nota
 
 ## Controlador
 ---------------
+Nota es el que se comunica con los datos, el controlador usa los métodos de Nota y le llama desde la vista
 - Filtrado de notas
     - Cada vez que escribas un caracter se vaya refrescando
 - Crear nota
