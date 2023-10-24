@@ -2,7 +2,6 @@
 
 ## Clase nota
 -----------
-- Leer directorio para sacar listadoNotas
 - Modificar nota
 
 ## Controlador

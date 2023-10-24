@@ -13,13 +13,13 @@ public class App extends Application {
     public void start(Stage pantalla) throws Exception {
 
         BorderPane borderPane = new BorderPane();
-        //Nota nota = new Nota("Una prueba", "Clase", "lorem ipsumlorem ipsumlorem ipsum");
+        //Nota nota = new Nota("Otra asdqwe", "xcvxcv", "klgh klgh");
         //System.out.println(nota.toString());
         //nota.guardarNota(nota);
         //System.out.println(nota.formatearFecha());
         //System.out.println(nota.desFormatearFecha("191023144115"));
-        Nota nota = Nota.leerNota("191023141745.txt");
-        System.out.println(nota);
+        //Nota nota = Nota.leerNota("191023141745.txt");
+        //System.out.println(Nota.crearListaFicheros());
         Scene escena = new Scene (borderPane);
         pantalla.setScene(escena);
         pantalla.setTitle("Notas");

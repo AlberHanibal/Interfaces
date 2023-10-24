@@ -6,12 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 public class Nota {
     
@@ -62,9 +59,13 @@ public class Nota {
         return fechaSinFormato;
     }
 
-    public void guardarNota(Nota nota) {
+    public static void guardarNota(Nota nota) {
         PrintWriter notaCompleta = null;
-        File ficheroNota = new File(nota.formatearFecha() + ".txt");
+        File carpeta = new File("Notas");
+        if (!carpeta.exists()) {
+            carpeta.mkdir();
+        }
+        File ficheroNota = new File("Notas/" + nota.formatearFecha() + ".txt");
         try {
             notaCompleta = new PrintWriter(ficheroNota);
             notaCompleta.format("título: %s%n" 
@@ -80,7 +81,7 @@ public class Nota {
 
     public static Nota leerNota(String nombreFichero) {
         try {
-            File fichero = new File(nombreFichero);
+            File fichero = new File("Notas/" + nombreFichero);
             BufferedReader notaCompleta = new BufferedReader(new FileReader(fichero));
             String lineaTitulo = notaCompleta.readLine();
             String titulo = lineaTitulo.split("título:")[1];
@@ -100,6 +101,21 @@ public class Nota {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public static ArrayList <Nota> crearListaFicheros() {
+        File carpeta = new File("Notas");
+        String [] nombreFicheros = carpeta.list();
+        if ((nombreFicheros == null) || nombreFicheros.length == 0) {
+            System.err.println("No existe la carpeta Notas o no hay notas");
+            return null;
+        } else {
+            ArrayList <Nota> lista = new ArrayList<>();
+            for (String nombre : nombreFicheros) {
+                lista.add(leerNota(nombre));
+            }
+            return lista;
+        }
     }
 
     @Override
