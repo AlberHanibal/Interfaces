@@ -137,9 +137,10 @@ public class Nota {
         this.setContenido(nuevaNota.getContenido());
     }
 
-	public String volcarNotaAString() {
+    public String volcarNotaAString() {
         return String.format("título: %s%ncategoría: %s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
     }
+
     @Override
     public String toString() {
         return "Nota [titulo=" + titulo + ", categoria=" + categoria + ", contenido=" + contenido + ", fechaCreacion="
