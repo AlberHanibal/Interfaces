@@ -8,3 +8,7 @@
 ## atributos cuantificables
 - forma objetiva: eficacia o números errores, clicks, tiempo para hacer algo, etc
 - forma subjetiva: satisfacción de uso mediante preguntas al usuario.
+
+
+## Técncias básicas
+-----------------
