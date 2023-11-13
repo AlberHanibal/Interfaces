@@ -67,7 +67,6 @@ public class Nota {
     private static LocalDateTime desFormatearFecha(String fechaFormateada) {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyHHmmss");
         LocalDateTime fechaSinFormato = LocalDateTime.parse(fechaFormateada, formato);
-        System.out.println(fechaSinFormato);
         return fechaSinFormato;
     }
 
