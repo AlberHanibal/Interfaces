@@ -7,8 +7,6 @@
 ## Controlador
 ---------------
 Nota es el que se comunica con los datos, el controlador usa los métodos de Nota y le llama desde la vista
-- Filtrado de notas
-    - Cada vez que escribas un caracter se vaya refrescando
 - Crear nota
     - Comprobar bien formada
         - Sino alerta error
@@ -29,8 +27,7 @@ Nota es el que se comunica con los datos, el controlador usa los métodos de Not
 - Creo que no haré esto
 ### Col izq
 - Filtrado
-    - Como almacenar los títulos de las notas con su nombre de fichero
-    - Detectar teclado y filtrar
+    - falta borrar el TextArea de notas o que si el filtro sea true para el TextArea siga 
 - Listado
     - hover, cambio de ratón para saber que es clickable
 ### Contenido

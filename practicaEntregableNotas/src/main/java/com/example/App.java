@@ -1,16 +1,11 @@
 package com.example;
 
-import java.util.ArrayList;
-
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -40,7 +35,7 @@ public class App extends Application {
         borderPane.setCenter(contenidoCentral);
 
         EventHandler<KeyEvent> manejadorFiltro = arg0 -> controlador.filtrarNotas(columnaNotas, cajaFiltro);
-        cajaFiltro.setOnKeyPressed(manejadorFiltro);
+        cajaFiltro.setOnKeyTyped(manejadorFiltro);
         controlador.crearColumnaNotas(columnaNotas, contenidoCentral);
 
         Scene escena = new Scene (borderPane);
