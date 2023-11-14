@@ -79,8 +79,8 @@ public class Nota {
         File ficheroNota = new File("Notas/" + nota.formatearFecha() + ".txt");
         try {
             notaCompleta = new PrintWriter(ficheroNota);
-            notaCompleta.format("título: %s%n" 
-            + "categoría: %s%n"
+            notaCompleta.format("titulo: %s%n" 
+            + "categoria: %s%n"
             + "---%n%n"
             + "%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido());
         } catch (FileNotFoundException ex) {
@@ -95,9 +95,9 @@ public class Nota {
             File fichero = new File("Notas/" + nombreFichero);
             BufferedReader notaCompleta = new BufferedReader(new FileReader(fichero));
             String lineaTitulo = notaCompleta.readLine();
-            String titulo = lineaTitulo.split("título:")[1];
+            String titulo = lineaTitulo.split("titulo:")[1];
             String lineaCategoria = notaCompleta.readLine();
-            String categoria = lineaCategoria.split("categoría:")[1];
+            String categoria = lineaCategoria.split("categoria:")[1];
             notaCompleta.readLine();
             notaCompleta.readLine();
             String lineaContenido;
@@ -137,7 +137,7 @@ public class Nota {
     }
 
 	public String volcarNotaAString() {
-        return String.format("título: %s%ncategoría: %s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
+        return String.format("titulo: %s%ncategoria: %s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
     }
     @Override
     public String toString() {

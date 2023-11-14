@@ -1,5 +1,5 @@
-título: Una prueba
-categoría: Clase
+titulo: Una prueba
+categoria: Clase
 ---
 
 lorem ipsumlorem ipsumlorem ipsum

@@ -1,5 +1,5 @@
-título: Otra asdqwe
-categoría: xcvxcv
+titulo: Otra asdqwe
+categoria: xcvxcv
 ---
 
 klgh klgh
