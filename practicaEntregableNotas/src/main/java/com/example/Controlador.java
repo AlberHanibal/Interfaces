@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 
 public class Controlador {
     
+    LineaNota notaSeleccionada = null;
+
     public void crearColumnaNotas(VBox columna, TextArea contenidoCentral) {
         ArrayList<Nota> lista = Nota.crearListaFicheros();
         for (Nota nota : lista) {
@@ -22,11 +24,21 @@ public class Controlador {
             linea.setOnMouseClicked(new EventHandler<Event>() {
                 public void handle(Event e) {
                     LineaNota pulsado = (LineaNota) e.getSource();
+                    seleccionarNota(pulsado);
+                    /*
+                    if (notaSeleccionada != null) {
+                        notaSeleccionada.deseleccionarLinea();
+                    }
+                    pulsado.seleccionarLinea();
+                    notaSeleccionada = pulsado;          
+                    */
+                    /*
                     Nota nota = (Nota) pulsado.getTitulo().getUserData();
                     if (!pulsado.isSeleccionado()) {
                         deseleccionarColumna(columna);
                         pulsado.seleccionarLinea();
                     }
+                    */
                     contenidoCentral.setText(nota.volcarNotaAString());
                 }
             });
@@ -68,6 +80,7 @@ public class Controlador {
         }
     }
 
+    /*
     private void deseleccionarColumna(VBox columna) {
         ObservableList<Node> listaNotas = columna.getChildren();
         LineaNota linea = null;
@@ -79,5 +92,43 @@ public class Controlador {
                 }
             }
         }
+    }
+    */
+
+    private void deseleccionarNota() {
+        if (notaSeleccionada != null) {
+            notaSeleccionada.deseleccionarLinea();
+            notaSeleccionada = null;
+        }
+    }
+
+    private void seleccionarNota(LineaNota linea) {
+        if (notaSeleccionada != null) {
+            deseleccionarNota();
+        }
+        notaSeleccionada = linea;
+        linea.seleccionarLinea();
+    }
+
+    public void añadirNota(VBox contenidoPrincipal) {
+        deseleccionarNota();
+        TextArea contenidoCentral = (TextArea) contenidoPrincipal.getChildren().get(0);
+        contenidoPrincipal.getChildren().get(1).setVisible(true);
+        contenidoPrincipal.getChildren().get(1).setManaged(true);
+        contenidoCentral.setText(Nota.esqueletoNota());
+    }
+
+    public void guardarNota(TextArea contenidoCentral) {
+        System.out.println(Nota.notaBienFormada(contenidoCentral.getText()));
+        // nota nueva
+        if (notaSeleccionada == null) {
+            
+        } else { // nota modificada
+
+        }
+    }
+
+    public void cancelar() {
+
     }
 }

@@ -79,8 +79,8 @@ public class Nota {
         File ficheroNota = new File("Notas/" + nota.formatearFecha() + ".txt");
         try {
             notaCompleta = new PrintWriter(ficheroNota);
-            notaCompleta.format("titulo: %s%n" 
-            + "categoria: %s%n"
+            notaCompleta.format("titulo:%s%n" 
+            + "categoria:%s%n"
             + "---%n%n"
             + "%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido());
         } catch (FileNotFoundException ex) {
@@ -137,8 +137,34 @@ public class Nota {
     }
 
 	public String volcarNotaAString() {
-        return String.format("titulo: %s%ncategoria: %s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
+        return String.format("titulo:%s%ncategoria:%s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
     }
+
+    public static String esqueletoNota() {
+        return String.format("titulo:%n" 
+            + "categoria:%n"
+            + "---%n%n");
+    }
+
+    public static boolean notaBienFormada(String stringNota) {
+        System.out.println(stringNota);
+        String[] stringLineas = stringNota.split("\\n");
+        if (stringLineas.length >= 3) {
+            String titulo = stringLineas[0];
+            if (!titulo.matches("titulo:.*"))
+                return false;
+            String categoria = stringLineas[1];
+            if (!categoria.matches("categoria:.*"))
+                return false;
+            String rayas = stringLineas[2];
+            if (!rayas.matches("---"))
+                return false;
+        } else 
+            return false;
+
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Nota [titulo=" + titulo + ", categoria=" + categoria + ", contenido=" + contenido + ", fechaCreacion="
