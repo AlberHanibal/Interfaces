@@ -9,8 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 public class Controlador {
@@ -119,13 +121,27 @@ public class Controlador {
     }
 
     public void guardarNota(TextArea contenidoCentral) {
-        System.out.println(Nota.notaBienFormada(contenidoCentral.getText()));
-        // nota nueva
-        if (notaSeleccionada == null) {
-            
-        } else { // nota modificada
+        
+        if (Nota.notaBienFormada(contenidoCentral.getText())) {
+            // nota nueva
+            if (notaSeleccionada == null) {
+                Nota nuevaNota = Nota.stringToNota(contenidoCentral.getText());
+                Nota.guardarNota(nuevaNota);
+                //Nota nota = Nota.leerNota(contenidoCentral.getText());
+                //Nota.guardarNota(nota);
+            } else { // nota modificada
+
+            }
+        } else {
+            // no sé como tratar el error
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error en la aplicación");
+            alert.setHeaderText("Cabecera del cuadro de dialogo");
+            alert.setContentText("Texto completo del cuadro de diálogo ... ");
+            alert.showAndWait();
 
         }
+        
     }
 
     public void cancelar() {

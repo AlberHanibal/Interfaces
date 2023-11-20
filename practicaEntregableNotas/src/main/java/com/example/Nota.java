@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Nota {
     
@@ -59,6 +60,10 @@ public class Nota {
         this.contenido = contenido;
     }
 
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     private String formatearFecha() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("ddMMyyHHmmss");
         return this.getFechaCreacion().format(formato);
@@ -93,25 +98,37 @@ public class Nota {
     public static Nota leerNota(String nombreFichero) {
         try {
             File fichero = new File("Notas/" + nombreFichero);
-            BufferedReader notaCompleta = new BufferedReader(new FileReader(fichero));
-            String lineaTitulo = notaCompleta.readLine();
-            String titulo = lineaTitulo.split("titulo:")[1];
-            String lineaCategoria = notaCompleta.readLine();
-            String categoria = lineaCategoria.split("categoria:")[1];
-            notaCompleta.readLine();
-            notaCompleta.readLine();
-            String lineaContenido;
-            String contenido = "";
-            while ((lineaContenido = notaCompleta.readLine()) != null) {
-                contenido += lineaContenido + "\n";
-            }
-            notaCompleta.close();
+            Scanner notaCompleta = new Scanner(fichero);
+            Nota nota = Nota.leerString(notaCompleta);
             String fechaCreacion = nombreFichero.split(".txt")[0];
-            return new Nota(titulo, categoria, contenido, desFormatearFecha(fechaCreacion));            
+            nota.setFechaCreacion(desFormatearFecha(fechaCreacion));
+            return nota;            
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public static Nota stringToNota(String stringNota) {
+        Scanner notaCompleta = new Scanner(stringNota);
+        Nota nota = Nota.leerString(notaCompleta);
+        return nota;
+    }
+
+    private static Nota leerString(Scanner crudo) {
+        String lineaTitulo = crudo.nextLine();
+        String titulo = lineaTitulo.split("titulo:")[1];
+        String lineaCategoria = crudo.nextLine();
+        String categoria = lineaCategoria.split("categoria:")[1];
+        crudo.nextLine();
+        String lineaContenido;
+        String contenido = "";
+        while (crudo.hasNextLine()) {
+            lineaContenido = crudo.nextLine();
+            contenido += lineaContenido + "\n";
+        }
+        crudo.close();
+        return new Nota(titulo, categoria, contenido);
     }
 
     public static ArrayList <Nota> crearListaFicheros() {
@@ -147,7 +164,6 @@ public class Nota {
     }
 
     public static boolean notaBienFormada(String stringNota) {
-        System.out.println(stringNota);
         String[] stringLineas = stringNota.split("\\n");
         if (stringLineas.length >= 3) {
             String titulo = stringLineas[0];
