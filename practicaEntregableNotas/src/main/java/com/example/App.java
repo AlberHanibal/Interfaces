@@ -39,7 +39,9 @@ public class App extends Application {
         TextField cajaFiltro = new TextField();
         lineaFiltrado.getChildren().addAll(filtro, cajaFiltro);
         
-        columnaNotas.getChildren().addAll(lineaAñadir, lineaFiltrado);
+        // Lista notas
+        VBox listaNotas = new VBox();
+        columnaNotas.getChildren().addAll(lineaAñadir, lineaFiltrado, listaNotas);
 
         VBox contenidoPrincipal = new VBox();
         TextArea contenidoCentral = new TextArea();
@@ -55,15 +57,15 @@ public class App extends Application {
         borderPane.setLeft(columnaNotas);
         borderPane.setCenter(contenidoPrincipal);
 
-        EventHandler<ActionEvent> manejadorAñadirNota = arg0 -> controlador.añadirNota(contenidoPrincipal);
+        EventHandler<ActionEvent> manejadorAñadirNota = arg0 -> controlador.añadirNota(contenidoPrincipal, arg0);
         botonAñadir.setOnAction(manejadorAñadirNota);
         EventHandler<KeyEvent> manejadorFiltro = arg0 -> controlador.filtrarNotas(columnaNotas, cajaFiltro);
         cajaFiltro.setOnKeyTyped(manejadorFiltro);
-        EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota(contenidoCentral);
+        EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota(columnaNotas, contenidoPrincipal);
         botonGuardar.setOnAction(manejadorGuardarNota);
         EventHandler<ActionEvent> manejadorCancelar = arg0 -> controlador.cancelar();
         botonCancelar.setOnAction(manejadorCancelar); 
-        controlador.crearColumnaNotas(columnaNotas, contenidoCentral);
+        controlador.crearColumnaNotas(columnaNotas, contenidoPrincipal);
 
         Scene escena = new Scene (borderPane);
         pantalla.setScene(escena);
