@@ -1,7 +1,0 @@
-titulo: asd asdas
-categoria: asd asd
----
-
-asd
-asdasd
-

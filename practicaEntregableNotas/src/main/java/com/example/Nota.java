@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nota {
-    
+
     private String titulo;
     private String categoria;
     private String contenido;
@@ -82,10 +82,10 @@ public class Nota {
         File ficheroNota = new File("Notas/" + nota.formatearFecha() + ".txt");
         try {
             notaCompleta = new PrintWriter(ficheroNota);
-            notaCompleta.format("titulo:%s%n" 
-            + "categoria:%s%n"
-            + "---%n%n"
-            + "%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido());
+            notaCompleta.format("titulo:%s%n"
+                    + "categoria:%s%n"
+                    + "---%n%n"
+                    + "%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido());
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -100,7 +100,7 @@ public class Nota {
             Nota nota = Nota.leerString(notaCompleta);
             String fechaCreacion = nombreFichero.split(".txt")[0];
             nota.setFechaCreacion(desFormatearFecha(fechaCreacion));
-            return nota;            
+            return nota;
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -129,14 +129,14 @@ public class Nota {
         return new Nota(titulo, categoria, contenido);
     }
 
-    public static ArrayList <Nota> crearListaFicheros() {
+    public static ArrayList<Nota> crearListaFicheros() {
         File carpeta = new File("Notas");
-        String [] nombreFicheros = carpeta.list();
+        String[] nombreFicheros = carpeta.list();
         if ((nombreFicheros == null) || nombreFicheros.length == 0) {
             System.err.println("No existe la carpeta Notas o no hay notas");
             return null;
         } else {
-            ArrayList <Nota> lista = new ArrayList<>();
+            ArrayList<Nota> lista = new ArrayList<>();
             for (String nombre : nombreFicheros) {
                 lista.add(leerNota(nombre));
             }
@@ -151,14 +151,20 @@ public class Nota {
         this.setContenido(nuevaNota.getContenido());
     }
 
-	public String volcarNotaAString() {
-        return String.format("titulo:%s%ncategoria:%s%n---%n%n%s", this.getTitulo(), this.getCategoria(), this.getContenido());
+    public void borrarNota() {
+        File notaABorrar = new File("Notas/" + this.formatearFecha() + ".txt");
+        notaABorrar.delete();
+    }
+
+    public String volcarNotaAString() {
+        return String.format("titulo:%s%ncategoria:%s%n---%n%n%s", this.getTitulo(), this.getCategoria(),
+                this.getContenido());
     }
 
     public static String esqueletoNota() {
-        return String.format("titulo:%n" 
-            + "categoria:%n"
-            + "---%n%n");
+        return String.format("titulo:%n"
+                + "categoria:%n"
+                + "---%n%n");
     }
 
     public static boolean notaBienFormada(String stringNota) {
@@ -173,7 +179,7 @@ public class Nota {
             String rayas = stringLineas[2];
             if (!rayas.matches("---"))
                 return false;
-        } else 
+        } else
             return false;
 
         return true;

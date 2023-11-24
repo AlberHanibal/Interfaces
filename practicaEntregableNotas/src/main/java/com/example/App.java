@@ -16,15 +16,19 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class App extends Application {
 
-    private Controlador controlador = new Controlador();
+    private VBox columnaNotas;
+    private VBox contenidoPrincipal;
+    private Controlador controlador;
 
     @Override
     public void start(Stage pantalla) throws Exception {
 
-        VBox columnaNotas = new VBox();
+        // Inicialización controlador
+        columnaNotas = new VBox();
+        contenidoPrincipal = new VBox();
+        controlador = new Controlador(columnaNotas, contenidoPrincipal);
 
         // Línea del botón añadir nota
         HBox lineaAñadir = new HBox();
@@ -32,18 +36,22 @@ public class App extends Application {
         Button botonAñadir = new Button("Nueva Nota");
         lineaAñadir.getChildren().addAll(spacer, botonAñadir);
         lineaAñadir.setHgrow(spacer, Priority.ALWAYS);
+        EventHandler<ActionEvent> manejadorAñadirNota = arg0 -> controlador.añadirNota(arg0);
+        botonAñadir.setOnAction(manejadorAñadirNota);
 
         // Línea del filtro
         HBox lineaFiltrado = new HBox();
         Label filtro = new Label("Filtro");
         TextField cajaFiltro = new TextField();
         lineaFiltrado.getChildren().addAll(filtro, cajaFiltro);
-        
+        EventHandler<KeyEvent> manejadorFiltro = arg0 -> controlador.filtrarNotas(cajaFiltro);
+        cajaFiltro.setOnKeyTyped(manejadorFiltro);
+
         // Lista notas
         VBox listaNotas = new VBox();
         columnaNotas.getChildren().addAll(lineaAñadir, lineaFiltrado, listaNotas);
 
-        VBox contenidoPrincipal = new VBox();
+        // Contenido central
         TextArea contenidoCentral = new TextArea();
         HBox lineaBotones = new HBox();
         lineaBotones.setVisible(false);
@@ -52,22 +60,18 @@ public class App extends Application {
         Button botonGuardar = new Button("Guardar");
         lineaBotones.getChildren().addAll(botonGuardar, botonCancelar);
         contenidoPrincipal.getChildren().addAll(contenidoCentral, lineaBotones);
-        
+        EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota();
+        botonGuardar.setOnAction(manejadorGuardarNota);
+        EventHandler<ActionEvent> manejadorCancelar = arg0 -> controlador.cancelar();
+        botonCancelar.setOnAction(manejadorCancelar);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setLeft(columnaNotas);
         borderPane.setCenter(contenidoPrincipal);
 
-        EventHandler<ActionEvent> manejadorAñadirNota = arg0 -> controlador.añadirNota(contenidoPrincipal, arg0);
-        botonAñadir.setOnAction(manejadorAñadirNota);
-        EventHandler<KeyEvent> manejadorFiltro = arg0 -> controlador.filtrarNotas(columnaNotas, cajaFiltro);
-        cajaFiltro.setOnKeyTyped(manejadorFiltro);
-        EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota(columnaNotas, contenidoPrincipal);
-        botonGuardar.setOnAction(manejadorGuardarNota);
-        EventHandler<ActionEvent> manejadorCancelar = arg0 -> controlador.cancelar();
-        botonCancelar.setOnAction(manejadorCancelar); 
-        controlador.crearColumnaNotas(columnaNotas, contenidoPrincipal);
+        controlador.crearColumnaNotas();
 
-        Scene escena = new Scene (borderPane);
+        Scene escena = new Scene(borderPane);
         pantalla.setScene(escena);
         pantalla.setTitle("Notas");
         pantalla.show();

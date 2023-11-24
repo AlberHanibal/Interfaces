@@ -1,13 +1,16 @@
 package com.example;
 
+import java.io.File;
+
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
 public class LineaNota extends HBox {
-    
+
     private Text titulo;
     private Button botonBorrar;
     private Button botonModificar;
@@ -16,8 +19,13 @@ public class LineaNota extends HBox {
     public LineaNota(Nota nota) {
 
         titulo = new Text(nota.getTitulo());
-        botonModificar = new Button("M");
-        botonBorrar = new Button("B");
+        File imagen = new File("assets/editar.png");
+        ImageView editar = new ImageView(imagen.toURI().toString());
+        botonModificar = new Button("", editar);
+        imagen = new File("assets/basura.png");
+        ImageView borrar = new ImageView(imagen.toURI().toString());
+        botonBorrar = new Button("", borrar);
+        botonBorrar.setStyle("-fx-graphic: url(assets/basura.png);");
         seleccionado = false;
         Region espacioVacio = new Region();
         this.setHgrow(espacioVacio, Priority.ALWAYS);
@@ -25,7 +33,7 @@ public class LineaNota extends HBox {
         titulo.setUserData(nota);
         botonBorrar.setVisible(false);
         botonModificar.setVisible(false);
-        
+
         this.getChildren().addAll(titulo, espacioVacio, botonModificar, botonBorrar);
     }
 
