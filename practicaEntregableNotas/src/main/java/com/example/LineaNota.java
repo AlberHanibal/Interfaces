@@ -19,20 +19,23 @@ public class LineaNota extends HBox {
     public LineaNota(Nota nota) {
 
         titulo = new Text(nota.getTitulo());
+        titulo.setUserData(nota);
+
         File imagen = new File("assets/editar.png");
         ImageView editar = new ImageView(imagen.toURI().toString());
         botonModificar = new Button("", editar);
+        botonModificar.setVisible(false);
+
         imagen = new File("assets/basura.png");
         ImageView borrar = new ImageView(imagen.toURI().toString());
         botonBorrar = new Button("", borrar);
-        seleccionado = false;
-        Region espacioVacio = new Region();
-        this.setHgrow(espacioVacio, Priority.ALWAYS);
-        this.setSpacing(10);
-
-        titulo.setUserData(nota);
         botonBorrar.setVisible(false);
-        botonModificar.setVisible(false);
+
+        seleccionado = false;
+
+        Region espacioVacio = new Region();
+        LineaNota.setHgrow(espacioVacio, Priority.ALWAYS);
+        this.setSpacing(10);
 
         this.getChildren().addAll(titulo, espacioVacio, botonModificar, botonBorrar);
     }
@@ -57,13 +60,17 @@ public class LineaNota extends HBox {
         return (Nota) this.titulo.getUserData();
     }
 
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
     public void seleccionarLinea() {
         this.seleccionado = true;
         botonBorrar.setVisible(true);
         botonModificar.setVisible(true);
         this.setStyle("-fx-border-style: solid;"
-                    + "-fx-border-width: 2px;"
-                    + "-fx-border-color: #81c8e0;");
+                + "-fx-border-width: 2px;"
+                + "-fx-border-color: #81c8e0;");
     }
 
     public void deseleccionarLinea() {
@@ -71,10 +78,6 @@ public class LineaNota extends HBox {
         botonBorrar.setVisible(false);
         botonModificar.setVisible(false);
         this.setStyle("");
-    }
-
-    public boolean isSeleccionado() {
-        return seleccionado;
     }
 
 }

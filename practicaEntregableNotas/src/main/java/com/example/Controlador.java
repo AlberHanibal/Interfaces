@@ -32,6 +32,8 @@ public class Controlador {
         this.contenidoPrincipal = contenidoPrincipal;
     }
 
+    // Crea la lista de LineaNota, leyendo del directorio Notas
+    // y los dota de los manejadores de click y modificar y borrar nota
     public void crearColumnaNotas() {
         TextArea contenidoCentral = (TextArea) this.contenidoPrincipal.getChildren().get(0);
         HBox lineaBotones = (HBox) this.contenidoPrincipal.getChildren().get(1);
@@ -39,33 +41,35 @@ public class Controlador {
         VBox listaNotas = (VBox) this.columnaNotas.getChildren().get(2);
         if (!lista.isEmpty()) {
             for (Nota nota : lista) {
-            LineaNota linea = new LineaNota(nota);
-            linea.setOnMouseClicked(new EventHandler<Event>() {
-                public void handle(Event e) {
-                    LineaNota pulsado = (LineaNota) e.getSource();
-                    seleccionarNota(pulsado);
-                    contenidoCentral.setText(nota.volcarNotaAString());
-                    contenidoCentral.setEditable(false);
-                    lineaBotones.setVisible(false);
-                    lineaBotones.setManaged(false);
-                }
-            });
-            linea.getBotonBorrar().setOnAction(new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent e) {
-                    borrarNota();
-                }
-            });
-            linea.getBotonModificar().setOnAction(new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent e) {
-                    añadirNota(e);
-                }
-            });
-            listaNotas.getChildren().add(linea);
+                LineaNota linea = new LineaNota(nota);
+                linea.setOnMouseClicked(new EventHandler<Event>() {
+                    public void handle(Event e) {
+                        LineaNota pulsado = (LineaNota) e.getSource();
+                        seleccionarNota(pulsado);
+                        contenidoCentral.setText(nota.volcarNotaAString());
+                        contenidoCentral.setEditable(false);
+                        lineaBotones.setVisible(false);
+                        lineaBotones.setManaged(false);
+                    }
+                });
+                linea.getBotonBorrar().setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e) {
+                        borrarNota();
+                    }
+                });
+                linea.getBotonModificar().setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e) {
+                        añadirNota(e);
+                    }
+                });
+                listaNotas.getChildren().add(linea);
+            }
         }
-        }
-        
+
     }
 
+    // Busca el string del filtro en cada nota, si no es true oculta la LineaNota de
+    // la interfaz
     public void filtrarNotas(TextField cajaFiltro) {
         ObservableList<Node> listaNotas = ((VBox) this.columnaNotas.getChildren().get(2)).getChildren();
         LineaNota linea = null;
@@ -95,7 +99,7 @@ public class Controlador {
         contenidoCentral.setEditable(true);
         this.contenidoPrincipal.getChildren().get(1).setVisible(true);
         this.contenidoPrincipal.getChildren().get(1).setManaged(true);
-        // ver si viene de un boton modificar o del nueva nota
+        // ver si viene de un botón modificar o del nueva nota
         Button boton = (Button) e.getSource();
         if (boton.getText().equals("Nueva Nota")) {
             deseleccionarNota();
@@ -117,14 +121,24 @@ public class Controlador {
                 Nota.guardarNota(notaSeleccionada.getNota());
             }
             resetInterfaz();
-            // seleccionar la nota creada (?)
+            if (notaSeleccionada == null) {
+                VBox listaNotas = (VBox) this.columnaNotas.getChildren().get(2);
+                this.seleccionarNota((LineaNota) listaNotas.getChildren().get(listaNotas.getChildren().size() - 1));
+            }
         } else {
-            // no sé como tratar el error
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error en la aplicación");
-            alert.setHeaderText("Cabecera del cuadro de dialogo");
-            alert.setContentText("Texto completo del cuadro de diálogo ... ");
-            alert.showAndWait();
+            Alert alert = new Alert(AlertType.ERROR, "La nota tiene que tener el formato preestablecido.",
+                    new ButtonType("Reiniciar Nota", ButtonData.YES),
+                    new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE));
+            alert.setTitle("Error guardar nota");
+            alert.setHeaderText("Formato erroneo.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get().getText().equals("Reiniciar Nota")) {
+                if (notaSeleccionada == null) { // nota nueva
+                    contenidoCentral.setText(Nota.esqueletoNota());
+                } else { // nota modificada
+                    contenidoCentral.setText(notaSeleccionada.getNota().volcarNotaAString());
+                }
+            }
         }
     }
 

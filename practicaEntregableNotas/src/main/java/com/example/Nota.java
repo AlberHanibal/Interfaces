@@ -73,6 +73,39 @@ public class Nota {
         return fechaSinFormato;
     }
 
+    // Crea una lista de notas a partir de los ficheros del directorio Notas
+    public static ArrayList<Nota> crearListaFicheros() {
+        File carpeta = new File("Notas");
+        if (!carpeta.exists()) {
+            carpeta.mkdir();
+        }
+        ArrayList<Nota> lista = new ArrayList<>();
+        String[] nombreFicheros = carpeta.list();
+        if ((nombreFicheros == null) || nombreFicheros.length == 0) {
+            System.err.println("No existe la carpeta Notas o no hay notas");
+            return lista;
+        } else {
+            for (String nombre : nombreFicheros) {
+                lista.add(leerNota(nombre));
+            }
+            return lista;
+        }
+    }
+
+    public static Nota leerNota(String nombreFichero) {
+        try {
+            File fichero = new File("Notas/" + nombreFichero);
+            Scanner notaCompleta = new Scanner(fichero);
+            Nota nota = Nota.leerString(notaCompleta);
+            String fechaCreacion = nombreFichero.split(".txt")[0];
+            nota.setFechaCreacion(desFormatearFecha(fechaCreacion));
+            return nota;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public static void guardarNota(Nota nota) {
         PrintWriter notaCompleta = null;
         File carpeta = new File("Notas");
@@ -93,58 +126,21 @@ public class Nota {
         }
     }
 
-    public static Nota leerNota(String nombreFichero) {
-        try {
-            File fichero = new File("Notas/" + nombreFichero);
-            Scanner notaCompleta = new Scanner(fichero);
-            Nota nota = Nota.leerString(notaCompleta);
-            String fechaCreacion = nombreFichero.split(".txt")[0];
-            nota.setFechaCreacion(desFormatearFecha(fechaCreacion));
-            return nota;
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
-    }
-
-    public static Nota stringToNota(String stringNota) {
-        Scanner notaCompleta = new Scanner(stringNota);
-        Nota nota = Nota.leerString(notaCompleta);
-        return nota;
-    }
-
-    private static Nota leerString(Scanner crudo) {
-        String lineaTitulo = crudo.nextLine();
+    // se usa tanto para leer un fichero como un string que contenga la nota
+    private static Nota leerString(Scanner stringCompleto) {
+        String lineaTitulo = stringCompleto.nextLine();
         String titulo = lineaTitulo.split("titulo:")[1];
-        String lineaCategoria = crudo.nextLine();
+        String lineaCategoria = stringCompleto.nextLine();
         String categoria = lineaCategoria.split("categoria:")[1];
-        crudo.nextLine();
+        stringCompleto.nextLine();
         String lineaContenido;
         String contenido = "";
-        while (crudo.hasNextLine()) {
-            lineaContenido = crudo.nextLine();
+        while (stringCompleto.hasNextLine()) {
+            lineaContenido = stringCompleto.nextLine();
             contenido += lineaContenido + "\n";
         }
-        crudo.close();
+        stringCompleto.close();
         return new Nota(titulo, categoria, contenido);
-    }
-
-    public static ArrayList<Nota> crearListaFicheros() {
-        File carpeta = new File("Notas");
-        if (!carpeta.exists()) {
-            carpeta.mkdir();
-        }
-        ArrayList<Nota> lista = new ArrayList<>();
-        String[] nombreFicheros = carpeta.list();
-        if ((nombreFicheros == null) || nombreFicheros.length == 0) {
-            System.err.println("No existe la carpeta Notas o no hay notas");
-            return lista;
-        } else {
-            for (String nombre : nombreFicheros) {
-                lista.add(leerNota(nombre));
-            }
-            return lista;
-        }
     }
 
     public void modificarNota(Nota nuevaNota) {
@@ -156,6 +152,12 @@ public class Nota {
     public void borrarNota() {
         File notaABorrar = new File("Notas/" + this.formatearFecha() + ".txt");
         notaABorrar.delete();
+    }
+
+    public static Nota stringToNota(String stringNota) {
+        Scanner notaCompleta = new Scanner(stringNota);
+        Nota nota = Nota.leerString(notaCompleta);
+        return nota;
     }
 
     public String volcarNotaAString() {
