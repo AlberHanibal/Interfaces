@@ -25,10 +25,10 @@ public class LineaNota extends HBox {
         imagen = new File("assets/basura.png");
         ImageView borrar = new ImageView(imagen.toURI().toString());
         botonBorrar = new Button("", borrar);
-        botonBorrar.setStyle("-fx-graphic: url(assets/basura.png);");
         seleccionado = false;
         Region espacioVacio = new Region();
         this.setHgrow(espacioVacio, Priority.ALWAYS);
+        this.setSpacing(10);
 
         titulo.setUserData(nota);
         botonBorrar.setVisible(false);
@@ -61,12 +61,16 @@ public class LineaNota extends HBox {
         this.seleccionado = true;
         botonBorrar.setVisible(true);
         botonModificar.setVisible(true);
+        this.setStyle("-fx-border-style: solid;"
+                    + "-fx-border-width: 2px;"
+                    + "-fx-border-color: #81c8e0;");
     }
 
     public void deseleccionarLinea() {
         this.seleccionado = false;
         botonBorrar.setVisible(false);
         botonModificar.setVisible(false);
+        this.setStyle("");
     }
 
     public boolean isSeleccionado() {

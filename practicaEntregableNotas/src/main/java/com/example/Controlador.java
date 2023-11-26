@@ -37,14 +37,15 @@ public class Controlador {
         HBox lineaBotones = (HBox) this.contenidoPrincipal.getChildren().get(1);
         ArrayList<Nota> lista = Nota.crearListaFicheros();
         VBox listaNotas = (VBox) this.columnaNotas.getChildren().get(2);
-
-        for (Nota nota : lista) {
+        if (!lista.isEmpty()) {
+            for (Nota nota : lista) {
             LineaNota linea = new LineaNota(nota);
             linea.setOnMouseClicked(new EventHandler<Event>() {
                 public void handle(Event e) {
                     LineaNota pulsado = (LineaNota) e.getSource();
                     seleccionarNota(pulsado);
                     contenidoCentral.setText(nota.volcarNotaAString());
+                    contenidoCentral.setEditable(false);
                     lineaBotones.setVisible(false);
                     lineaBotones.setManaged(false);
                 }
@@ -61,6 +62,8 @@ public class Controlador {
             });
             listaNotas.getChildren().add(linea);
         }
+        }
+        
     }
 
     public void filtrarNotas(TextField cajaFiltro) {
@@ -89,6 +92,7 @@ public class Controlador {
 
     public void añadirNota(ActionEvent e) {
         TextArea contenidoCentral = (TextArea) this.contenidoPrincipal.getChildren().get(0);
+        contenidoCentral.setEditable(true);
         this.contenidoPrincipal.getChildren().get(1).setVisible(true);
         this.contenidoPrincipal.getChildren().get(1).setManaged(true);
         // ver si viene de un boton modificar o del nueva nota
@@ -110,6 +114,7 @@ public class Controlador {
             } else { // nota modificada
                 Nota modNota = Nota.stringToNota(contenidoCentral.getText());
                 notaSeleccionada.getNota().modificarNota(modNota);
+                Nota.guardarNota(notaSeleccionada.getNota());
             }
             resetInterfaz();
             // seleccionar la nota creada (?)
@@ -142,6 +147,7 @@ public class Controlador {
     public void cancelar() {
         TextArea contenidoCentral = (TextArea) contenidoPrincipal.getChildren().get(0);
         contenidoCentral.setText("");
+        contenidoCentral.setEditable(false);
         HBox lineaBotones = (HBox) this.contenidoPrincipal.getChildren().get(1);
         lineaBotones.setVisible(false);
         lineaBotones.setManaged(false);
@@ -170,6 +176,11 @@ public class Controlador {
         VBox listaNotas = (VBox) this.columnaNotas.getChildren().get(2);
         listaNotas.getChildren().clear();
         this.crearColumnaNotas();
+        TextArea contenidoCentral = (TextArea) this.contenidoPrincipal.getChildren().get(0);
+        contenidoCentral.setEditable(false);
+        HBox lineaFiltrado = (HBox) this.columnaNotas.getChildren().get(1);
+        TextField filtro = (TextField) lineaFiltrado.getChildren().get(1);
+        filtro.setText("");
     }
 
 }

@@ -26,7 +26,7 @@ public class App extends Application {
     public void start(Stage pantalla) throws Exception {
 
         // Inicialización controlador
-        columnaNotas = new VBox();
+        columnaNotas = new VBox(10);
         contenidoPrincipal = new VBox();
         controlador = new Controlador(columnaNotas, contenidoPrincipal);
 
@@ -40,7 +40,7 @@ public class App extends Application {
         botonAñadir.setOnAction(manejadorAñadirNota);
 
         // Línea del filtro
-        HBox lineaFiltrado = new HBox();
+        HBox lineaFiltrado = new HBox(20);
         Label filtro = new Label("Filtro");
         TextField cajaFiltro = new TextField();
         lineaFiltrado.getChildren().addAll(filtro, cajaFiltro);
@@ -48,11 +48,13 @@ public class App extends Application {
         cajaFiltro.setOnKeyTyped(manejadorFiltro);
 
         // Lista notas
-        VBox listaNotas = new VBox();
+        VBox listaNotas = new VBox(5);
         columnaNotas.getChildren().addAll(lineaAñadir, lineaFiltrado, listaNotas);
 
         // Contenido central
         TextArea contenidoCentral = new TextArea();
+        contenidoCentral.setStyle("-fx-font-size: 1.3em");
+        contenidoCentral.setEditable(false);
         HBox lineaBotones = new HBox();
         lineaBotones.setVisible(false);
         lineaBotones.setManaged(false);
@@ -60,6 +62,8 @@ public class App extends Application {
         Button botonGuardar = new Button("Guardar");
         lineaBotones.getChildren().addAll(botonGuardar, botonCancelar);
         contenidoPrincipal.getChildren().addAll(contenidoCentral, lineaBotones);
+        contenidoPrincipal.setVgrow(contenidoCentral, Priority.ALWAYS);
+
         EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota();
         botonGuardar.setOnAction(manejadorGuardarNota);
         EventHandler<ActionEvent> manejadorCancelar = arg0 -> controlador.cancelar();
@@ -68,10 +72,11 @@ public class App extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setLeft(columnaNotas);
         borderPane.setCenter(contenidoPrincipal);
+        borderPane.setStyle("-fx-font-size: 14px");
 
         controlador.crearColumnaNotas();
 
-        Scene escena = new Scene(borderPane);
+        Scene escena = new Scene(borderPane, 1000, 500);
         pantalla.setScene(escena);
         pantalla.setTitle("Notas");
         pantalla.show();

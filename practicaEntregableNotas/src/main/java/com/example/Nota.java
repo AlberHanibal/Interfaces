@@ -84,8 +84,8 @@ public class Nota {
             notaCompleta = new PrintWriter(ficheroNota);
             notaCompleta.format("titulo:%s%n"
                     + "categoria:%s%n"
-                    + "---%n%n"
-                    + "%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido());
+                    + "---%n"
+                    + "%n%s%n", nota.getTitulo(), nota.getCategoria(), nota.getContenido().trim());
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } finally {
@@ -131,12 +131,15 @@ public class Nota {
 
     public static ArrayList<Nota> crearListaFicheros() {
         File carpeta = new File("Notas");
+        if (!carpeta.exists()) {
+            carpeta.mkdir();
+        }
+        ArrayList<Nota> lista = new ArrayList<>();
         String[] nombreFicheros = carpeta.list();
         if ((nombreFicheros == null) || nombreFicheros.length == 0) {
             System.err.println("No existe la carpeta Notas o no hay notas");
-            return null;
+            return lista;
         } else {
-            ArrayList<Nota> lista = new ArrayList<>();
             for (String nombre : nombreFicheros) {
                 lista.add(leerNota(nombre));
             }
@@ -144,7 +147,6 @@ public class Nota {
         }
     }
 
-    // pasarle la nota o los parámetros (?)
     public void modificarNota(Nota nuevaNota) {
         this.setTitulo(nuevaNota.getTitulo());
         this.setCategoria(nuevaNota.getCategoria());
@@ -158,7 +160,7 @@ public class Nota {
 
     public String volcarNotaAString() {
         return String.format("titulo:%s%ncategoria:%s%n---%n%n%s", this.getTitulo(), this.getCategoria(),
-                this.getContenido());
+                this.getContenido().trim());
     }
 
     public static String esqueletoNota() {
@@ -171,10 +173,10 @@ public class Nota {
         String[] stringLineas = stringNota.split("\\n");
         if (stringLineas.length >= 3) {
             String titulo = stringLineas[0];
-            if (!titulo.matches("titulo:.*"))
+            if (!titulo.matches("titulo:.+"))
                 return false;
             String categoria = stringLineas[1];
-            if (!categoria.matches("categoria:.*"))
+            if (!categoria.matches("categoria:.+"))
                 return false;
             String rayas = stringLineas[2];
             if (!rayas.matches("---"))
