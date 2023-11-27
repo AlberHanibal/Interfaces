@@ -55,6 +55,7 @@ public class App extends Application {
         TextArea contenidoCentral = new TextArea();
         contenidoCentral.setStyle("-fx-font-size: 1.3em");
         contenidoCentral.setEditable(false);
+
         HBox lineaBotones = new HBox(10);
         lineaBotones.setVisible(false);
         lineaBotones.setManaged(false);
@@ -65,6 +66,7 @@ public class App extends Application {
         EventHandler<ActionEvent> manejadorGuardarNota = arg0 -> controlador.guardarNota();
         botonGuardar.setOnAction(manejadorGuardarNota);
         lineaBotones.getChildren().addAll(botonGuardar, botonCancelar);
+        
         contenidoPrincipal.getChildren().addAll(contenidoCentral, lineaBotones);
         VBox.setVgrow(contenidoCentral, Priority.ALWAYS);
 

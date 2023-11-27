@@ -82,7 +82,6 @@ public class Nota {
         ArrayList<Nota> lista = new ArrayList<>();
         String[] nombreFicheros = carpeta.list();
         if ((nombreFicheros == null) || nombreFicheros.length == 0) {
-            System.err.println("No existe la carpeta Notas o no hay notas");
             return lista;
         } else {
             for (String nombre : nombreFicheros) {
@@ -185,7 +184,6 @@ public class Nota {
                 return false;
         } else
             return false;
-
         return true;
     }
 

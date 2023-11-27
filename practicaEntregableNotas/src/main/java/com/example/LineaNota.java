@@ -9,6 +9,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
+// la clase LineaNota es un HBox con la información (userData) de una Nota en el título y 
+// dos botones para borrar y modificar las notas
 public class LineaNota extends HBox {
 
     private Text titulo;
@@ -18,14 +20,17 @@ public class LineaNota extends HBox {
 
     public LineaNota(Nota nota) {
 
+        // título
         titulo = new Text(nota.getTitulo());
         titulo.setUserData(nota);
 
+        // botón modificar
         File imagen = new File("assets/editar.png");
         ImageView editar = new ImageView(imagen.toURI().toString());
         botonModificar = new Button("", editar);
         botonModificar.setVisible(false);
 
+        // boton borrar
         imagen = new File("assets/basura.png");
         ImageView borrar = new ImageView(imagen.toURI().toString());
         botonBorrar = new Button("", borrar);

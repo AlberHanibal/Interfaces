@@ -124,6 +124,8 @@ public class Controlador {
             if (notaSeleccionada == null) {
                 VBox listaNotas = (VBox) this.columnaNotas.getChildren().get(2);
                 this.seleccionarNota((LineaNota) listaNotas.getChildren().get(listaNotas.getChildren().size() - 1));
+            } else {
+                seleccionarNota(notaSeleccionada);
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR, "La nota tiene que tener el formato preestablecido.",
