@@ -14,12 +14,14 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static Prueba prueba;
 
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("principal.fxml"));
-        Parent root = loader.load();
+        prueba = new Prueba();
+        prueba.setAnnos(12);
+        Parent root = cargarEscena("principal.fxml");
 
         scene = new Scene(root, 640, 480);
         stage.setScene(scene);
@@ -30,4 +32,23 @@ public class App extends Application {
         launch();
     }
 
+    public static Scene getScene() {
+        return scene;
+    }
+
+    public static Prueba getPrueba() {
+        return prueba;
+    }
+
+    public static Parent cargarEscena(String fichero) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fichero));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return root;
+    }
 }
