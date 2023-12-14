@@ -14,7 +14,6 @@ public class ControladorSec {
 
     public void initialize() { 
         textoUsuario = App.getPrueba().getCositas();
-        System.out.println(App.getPrueba().toString());
         textoBienvenida.setText("Bienvenido " + textoUsuario);
     }
 
