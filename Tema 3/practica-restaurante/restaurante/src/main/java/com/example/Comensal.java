@@ -50,6 +50,4 @@ public class Comensal {
     public void setTarjeta(boolean tarjeta) {
         this.tarjeta = tarjeta;
     }
-
-    
 }

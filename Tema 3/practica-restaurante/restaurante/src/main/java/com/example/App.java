@@ -22,7 +22,7 @@ public class App extends Application {
         Parent root = cargarEscena("login.fxml");
         comanda = new Comanda();
 
-        scene = new Scene(root, 640, 480);
+        scene = new Scene(root, 750, 500);
         stage.setScene(scene);
         stage.show();
     }
