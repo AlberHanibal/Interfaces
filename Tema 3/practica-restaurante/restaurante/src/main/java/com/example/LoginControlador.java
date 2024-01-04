@@ -21,6 +21,5 @@ public class LoginControlador{
         } else {
             // sacar error
         }
-        System.out.println("Click siguiente");
     }
 }

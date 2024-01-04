@@ -10,13 +10,17 @@ public class SeleccionMesaControlador {
 
     @FXML
     private void clickSiguiente() {
-
+        if (!App.getComanda().getMesa().equals("")) {
+            // cambiar de pantalla
+            App.getScene().setRoot(App.cargarEscena("comensales.fxml"));
+        } else {
+            // sacar error
+        }
     }
 
     @FXML
     private void seleccionarMesa(Event e) {
         Button boton = (Button) e.getSource();
-        System.out.println(boton.getText());
-        System.out.println(boton.getParent().getId());
+        App.getComanda().setMesa(boton.getParent().getId() + ": " + boton.getText());
     }
 }

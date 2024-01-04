@@ -9,6 +9,8 @@ public class Comanda {
     private ArrayList<Comensal> comensales;
 
     public Comanda() {
+        camarero = "";
+        mesa = "";
         comensales = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             comensales.add(new Comensal());
@@ -33,5 +35,10 @@ public class Comanda {
 
     public void setMesa(String mesa) {
         this.mesa = mesa;
+    }
+
+    @Override
+    public String toString() {
+        return "Comanda [camarero=" + camarero + ", mesa=" + mesa + ", comensales=" + comensales + "]";
     }
 }

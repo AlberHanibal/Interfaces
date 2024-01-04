@@ -50,4 +50,12 @@ public class Comensal {
     public void setTarjeta(boolean tarjeta) {
         this.tarjeta = tarjeta;
     }
+
+    @Override
+    public String toString() {
+        return "Comensal [primerPlato=" + primerPlato + ", bebida=" + bebida + ", comentario=" + comentario
+                + ", descuento=" + descuento + ", tarjeta=" + tarjeta + "]";
+    }
+
+    
 }
