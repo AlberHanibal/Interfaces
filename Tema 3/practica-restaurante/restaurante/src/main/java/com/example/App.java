@@ -15,6 +15,7 @@ public class App extends Application {
 
     private static Scene scene;
     private static Comanda comanda;
+    private static int comensalActual = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -38,6 +39,14 @@ public class App extends Application {
 
     public static Comanda getComanda() {
         return comanda;
+    }
+
+    public static int getComensalActual() {
+        return comensalActual;
+    }
+
+    public static void setComensalActual(int comensal) {
+        comensalActual = comensal;
     }
 
     public static Parent cargarEscena(String fichero) {

@@ -9,6 +9,11 @@ public class Comensal {
     private boolean tarjeta;
 
     public Comensal() {
+        primerPlato = "";
+        bebida = "";
+        comentario = "";
+        descuento = false;
+        tarjeta = false;
     }
 
     public String getPrimerPlato() {
