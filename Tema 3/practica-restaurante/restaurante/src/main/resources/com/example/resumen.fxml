@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ResumenControlador">
+   <bottom>
+      <HBox prefHeight="54.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="54.0" prefWidth="21.0" />
+            <Label fx:id="textoMesa" prefHeight="17.0" prefWidth="94.0" />
+            <Region prefHeight="54.0" prefWidth="422.0" />
+            <Button fx:id="botonCancelar" mnemonicParsing="false" onAction="#clickCancelar" text="Cancelar">
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="botonSiguiente" mnemonicParsing="false" onAction="#clickSiguiente" text="Siguiente">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

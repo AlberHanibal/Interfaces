@@ -16,6 +16,14 @@ public class Comensal {
         tarjeta = false;
     }
 
+    public Comensal(String primerPlato, String bebida, String comentario, boolean descuento, boolean tarjeta) {
+        this.primerPlato = primerPlato;
+        this.bebida = bebida;
+        this.comentario = comentario;
+        this.descuento = descuento;
+        this.tarjeta = tarjeta;
+    }
+
     public String getPrimerPlato() {
         return primerPlato;
     }
