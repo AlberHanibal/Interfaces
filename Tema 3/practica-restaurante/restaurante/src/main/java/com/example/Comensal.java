@@ -66,8 +66,12 @@ public class Comensal {
 
     @Override
     public String toString() {
-        return "Comensal [primerPlato=" + primerPlato + ", bebida=" + bebida + ", comentario=" + comentario
-                + ", descuento=" + descuento + ", tarjeta=" + tarjeta + "]";
+        return String.format("- %s.%n"
+                            + "- %s.%n"
+                            + "%s descuento.%n"
+                            + "Pago %s.%n"
+                            + "%s%n", primerPlato, bebida, (descuento)?"Con":"Sin", (tarjeta)?"con tarjeta":"en efectivo", 
+                            (comentario.equals(""))?"":"Comentario: " + comentario + ".");
     }
 
     

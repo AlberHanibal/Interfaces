@@ -13,10 +13,10 @@ public class ResumenControlador{
     private Button botonCancelar;
 
     @FXML
-    private Label textoMesa;
+    private Label textoCamarero;
 
     @FXML
-    private Label textoComensal;
+    private Label textoComanda;
 
     @FXML
     private void clickSiguiente() {

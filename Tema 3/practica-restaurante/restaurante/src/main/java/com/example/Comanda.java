@@ -39,6 +39,12 @@ public class Comanda {
 
     @Override
     public String toString() {
-        return "Comanda [camarero=" + camarero + ", mesa=" + mesa + ", comensales=" + comensales + "]";
+        String ticket = "";
+        for (int i = 0; i < comensales.size(); i++) {
+            if (!comensales.get(i).getPrimerPlato().equals("")) {
+                ticket += String.format("Comensal %d:%n", i + 1) + comensales.get(i);
+            }
+        }
+        return ticket;
     }
 }
