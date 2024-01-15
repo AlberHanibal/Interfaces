@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -39,6 +38,10 @@ public class App extends Application {
 
     public static Comanda getComanda() {
         return comanda;
+    }
+
+    public static void setComanda(Comanda nuevaComanda) {
+        comanda = nuevaComanda;
     }
 
     public static int getComensalActual() {

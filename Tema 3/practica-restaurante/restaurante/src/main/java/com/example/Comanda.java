@@ -29,6 +29,10 @@ public class Comanda {
         return comensales;
     }
 
+    public void setComensales(ArrayList<Comensal> nuevosComensales) {
+        comensales = nuevosComensales;
+    }
+
     public void setCamarero(String camarero) {
         this.camarero = camarero;
     }

@@ -1,13 +1,13 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-public class ComensalesControlador{
+public class ComensalesControlador {
 
     @FXML
     private Button botonSiguiente;
@@ -19,7 +19,7 @@ public class ComensalesControlador{
     private Label textoMesa;
 
     @FXML
-    private ListView listaComensales;
+    private ListView<String> listaComensales;
 
     @FXML
     private void clickSiguiente() {
@@ -27,12 +27,13 @@ public class ComensalesControlador{
         if (!comensal.equals("")) {
             int comensalActual = Integer.parseInt(comensal.split(" ")[1]);
             App.setComensalActual(comensalActual);
-            App.getScene().setRoot(App.cargarEscena("comanda.fxml"));    
+            App.getScene().setRoot(App.cargarEscena("comanda.fxml"));
         }
     }
 
     @FXML
     private void clickCancelar() {
+        reiniciarComensales();
         App.getScene().setRoot(App.cargarEscena("seleccion_mesa.fxml"));
     }
 
@@ -45,5 +46,13 @@ public class ComensalesControlador{
                 listaComensales.getItems().add(String.format("Comensal %d", i + 1));
             }
         }
+    }
+
+    private void reiniciarComensales() {
+        ArrayList<Comensal> nuevosComensales = new ArrayList<Comensal>();
+        for (int i = 0; i < 4; i++) {
+            nuevosComensales.add(new Comensal());
+        }
+        App.getComanda().setComensales(nuevosComensales);
     }
 }

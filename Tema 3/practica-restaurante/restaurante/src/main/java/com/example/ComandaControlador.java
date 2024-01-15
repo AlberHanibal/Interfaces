@@ -8,7 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 
-public class ComandaControlador{
+public class ComandaControlador {
 
     @FXML
     private Button botonSiguiente;
@@ -40,10 +40,10 @@ public class ComandaControlador{
     @FXML
     private void clickSiguiente() {
         RadioButton opcionPlato = (RadioButton) primerPlato.getSelectedToggle();
-        RadioButton opcionBebida = (RadioButton) bebida.getSelectedToggle();        
+        RadioButton opcionBebida = (RadioButton) bebida.getSelectedToggle();
         if (opcionPlato != null && opcionBebida != null) {
-            Comensal comensal = new Comensal(opcionPlato.getText(), opcionBebida.getText(), 
-            cajaComentarios.getText(), checkDescuento.isSelected(), checkTarjeta.isSelected());
+            Comensal comensal = new Comensal(opcionPlato.getText(), opcionBebida.getText(),
+                    cajaComentarios.getText(), checkDescuento.isSelected(), checkTarjeta.isSelected());
             App.getComanda().getComensales().set(App.getComensalActual() - 1, comensal);
             App.getScene().setRoot(App.cargarEscena("resumen.fxml"));
         }

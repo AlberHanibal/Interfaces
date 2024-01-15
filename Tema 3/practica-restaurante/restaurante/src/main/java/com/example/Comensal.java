@@ -68,9 +68,7 @@ public class Comensal {
     public String toString() {
         return String.format("     %s.%n"
                             +"     %s.%n"
-                            +"     %s descuento.%n"
-                            +"     Pago %s.%n"
-                            +"     %s%n", primerPlato, bebida, (descuento)?"Con":"Sin", (tarjeta)?"con tarjeta":"en efectivo", 
+                            +"     %s descuento. Pago %s. %s%n%n", primerPlato, bebida, (descuento)?"Con":"Sin", (tarjeta)?"con tarjeta":"en efectivo", 
                             (comentario.equals(""))?"":"Comentario: " + comentario + ".");
     }
 

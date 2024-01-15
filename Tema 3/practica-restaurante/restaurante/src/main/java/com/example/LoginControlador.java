@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class LoginControlador{
+public class LoginControlador {
 
     @FXML
     private TextField cajaLogin;
@@ -18,8 +18,6 @@ public class LoginControlador{
             App.getComanda().setCamarero(cajaLogin.getText());
             // cambiar de pantalla
             App.getScene().setRoot(App.cargarEscena("seleccion_mesa.fxml"));
-        } else {
-            // sacar error
         }
     }
 }
