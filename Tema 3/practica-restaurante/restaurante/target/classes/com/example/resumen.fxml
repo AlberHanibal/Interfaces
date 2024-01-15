@@ -13,18 +13,25 @@
    <bottom>
       <HBox prefHeight="54.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Region prefHeight="54.0" prefWidth="21.0" />
-            <Label fx:id="textoMesa" prefHeight="17.0" prefWidth="94.0" />
-            <Region prefHeight="54.0" prefWidth="422.0" />
-            <Button fx:id="botonCancelar" mnemonicParsing="false" onAction="#clickCancelar" text="Cancelar">
+            <Button fx:id="botonCancelar" mnemonicParsing="false" text="Cancelar Comanda">
+               <font>
+                  <Font size="14.0" />
+               </font>
                <HBox.margin>
-                  <Insets right="30.0" />
+                  <Insets left="25.0" />
+               </HBox.margin>
+            </Button>
+            <Region prefHeight="54.0" prefWidth="150.0" />
+            <Button fx:id="botonProcesar" mnemonicParsing="false" onAction="#clickCancelar" text="Procesar Comanda">
+               <HBox.margin>
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="botonSiguiente" mnemonicParsing="false" onAction="#clickSiguiente" text="Siguiente">
+            <Region prefHeight="54.0" prefWidth="150.0" />
+            <Button fx:id="botonAñadirComensal" mnemonicParsing="false" onAction="#clickSiguiente" text="Añadir Comensal">
                <font>
                   <Font size="14.0" />
                </font></Button>

@@ -45,7 +45,6 @@ public class ComandaControlador{
             Comensal comensal = new Comensal(opcionPlato.getText(), opcionBebida.getText(), 
             cajaComentarios.getText(), checkDescuento.isSelected(), checkTarjeta.isSelected());
             App.getComanda().getComensales().set(App.getComensalActual() - 1, comensal);
-            System.out.println(App.getComanda().toString());
             App.getScene().setRoot(App.cargarEscena("resumen.fxml"));
         }
     }

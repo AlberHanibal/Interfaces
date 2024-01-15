@@ -29,6 +29,8 @@ public class ResumenControlador{
     }
 
     public void initialize() {
-        
+        // deshabilitar el boton añadir comensal si ya hay 4
+        textoCamarero.setText("Procesado por Camarero: " + App.getComanda().getCamarero());
+        textoComanda.setText(App.getComanda().toString());
     }
 }
