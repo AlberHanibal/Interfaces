@@ -1,0 +1,7 @@
+El Señor de Los Anillos:Tolkien:Contemporánea:fantasía,  novela
+Harry Potter:J.K Rowling:Contemporánea:juvenil
+Cita con Rama:Arthur C. Clarke:Ciencia Ficción:juvenil
+Sherlock Holmes:Arthur Connan Doyle:Contemporánea:intriga
+La Fundación:Isaac Asimov:Ciencia Ficción:novela
+Matar a un ruiseñor:Harper Lee:Contemporánea:novela
+

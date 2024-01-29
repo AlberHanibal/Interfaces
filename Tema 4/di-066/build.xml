@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project name = "app" default = "general" basedir = ".">
+
+	<property name = "srcdir" location = "src" />
+	<property name = "distdir" location = "class" />
+	
+	<path id = "classpath.app">
+		<pathelement location = "${srcdir}" />
+		<pathelement location = "${distdir}" />
+		<pathelement location = "libreria.jar" />
+	</path>
+
+	<target name = "general" depends = "empaqueta">
+	
+	</target>
+	
+	<target name = "empaqueta" depends = "compila">
+		<jar destfile = "miapp.jar" manifest = "manifiesto.txt" basedir = "${distdir}" />
+	</target>
+	
+	<target name = "compila" depends = "clean">
+		<mkdir dir = "${distdir}" />
+		<javac srcdir = "${srcdir}" destdir = "${distdir}" >
+			<classpath refid = "classpath.app"/>
+		</javac>
+	</target>
+	
+	<target name = "clean">
+		<delete dir = "${distdir}" />
+		<delete file = "miapp.jar" />
+	</target>
+	
+</project>
