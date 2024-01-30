@@ -7,11 +7,13 @@
 	<path id = "classpath.app">
 		<pathelement location = "${srcdir}" />
 		<pathelement location = "${distdir}" />
-		<pathelement location = "libreria.jar" />
+		<pathelement location = "lib/libreria.jar" />
+		<!-->
+		<pathelement location = "C:/Users/DAM2A-03/Documents/Interfaces/ProyectosInterfaces/Tema 4/di-066/lib/libreria.jar" />
+		<-->
 	</path>
 
 	<target name = "general" depends = "empaqueta">
-	
 	</target>
 	
 	<target name = "empaqueta" depends = "compila">
