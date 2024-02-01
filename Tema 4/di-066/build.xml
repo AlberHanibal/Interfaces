@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name = "app" default = "general" basedir = ".">
+<project name = "app" default = "general" >
 
 	<property name = "srcdir" location = "src" />
 	<property name = "distdir" location = "class" />
@@ -7,7 +7,7 @@
 	<path id = "classpath.app">
 		<pathelement location = "${srcdir}" />
 		<pathelement location = "${distdir}" />
-		<pathelement location = "lib/libreria.jar" />
+		<pathelement location = "./lib/libreria.jar" />
 		<!-->
 		<pathelement location = "C:/Users/DAM2A-03/Documents/Interfaces/ProyectosInterfaces/Tema 4/di-066/lib/libreria.jar" />
 		<-->

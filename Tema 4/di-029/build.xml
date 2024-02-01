@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project name="app" default="general" basedir = ".">
+
+  <property name = "srcdir" location = "src" />
+  <property name = "distdir" location = "class" />
+
+  <!-- variable classpath que usaremos. -->
+	<path id="classpath.app">
+    <!-- es necesario actualizar el valor de location para que funcione 
+    en tu máquina. Pon allí la ruta absoluta del directorio donde instalaste
+    el JAR de Junit -->
+		<pathelement location="C:/Users/DAM2A-03/Documents/Interfaces/ProyectosInterfaces/Librerias/junit/junit-4.13.2.jar" />
+    <pathelement location="C:/Users/DAM2A-03/Documents/Interfaces/ProyectosInterfaces/Librerias/junit/hamcrest-core-1.3.jar" />
+    <pathelement location = "${distdir}" />
+    <pathelement location = "${srcdir}" />
+	</path>
+
+	<target name="general" depends="empaqueta">
+	</target>
+
+	<target name="empaqueta" depends="compila">
+		<jar destfile="miapp.jar" manifest="manifiesto.txt" basedir="${distdir}" />
+	</target>
+
+	<target name="compila">
+    <mkdir dir="${distdir}" />
+		<javac srcdir="${srcdir}" destdir="${distdir}" includeantruntime="false">
+      <classpath refid="classpath.app"/>
+    </javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="${distdir}" />
+		<delete file="miapp.jar" />
+	</target>
+
+
+  <target name="test" depends="compila">
+    <junit printsummary="on" haltonfailure="yes" fork="true">
+        <classpath>
+          <path refid="classpath.app"/>
+        </classpath>
+        <formatter type="brief" usefile="false" />
+        <batchtest>
+            <fileset dir="${srcdir}" includes="**/Test*" />
+        </batchtest>
+    </junit>
+  </target>
+
+</project>

@@ -17,8 +17,7 @@
 	</target>
 	
 	<target name = "empaqueta" depends = "compila">
-		<jar destfile = "miapp.jar" manifest = "manifiesto.txt" basedir = "${distdir}" >
-		</jar>
+		<jar destfile = "miapp.jar" manifest = "manifiesto.txt" basedir = "${distdir}" />
 	</target>
 	
 	<target name = "compila" depends = "clean">
