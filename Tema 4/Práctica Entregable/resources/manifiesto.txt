@@ -1,2 +1,2 @@
-Main-Class: app.main.app
+Main-Class: app.main.App
 

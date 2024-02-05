@@ -3,6 +3,8 @@
 
     <property name = "srcdir" location = "src" />
     <property name = "classdir" location = "classes" />
+    <property name = "distdir" location = "dist" />
+    <property name = "resourcesdir" location = "resources" />
 
     <path id = "classpath.app">
         <pathelement location = "${classdir}" />
@@ -18,10 +20,16 @@
     </target>
 
     <target name = "empaqueta" depends = "compila">
-        <jar destfile/>
+    <mkdir dir = "${distdir}/resources" />
+    <copy todir="${distdir}/resources">
+        <fileset dir="${resourcesdir}">
+            <include name="datos.xml"/>
+        </fileset>
+    </copy>
+        <jar destfile = "${distdir}/app.jar" manifest = "${resourcesdir}/manifiesto.txt" basedir = "${classdir}" />
     </target>
 
-    <target name = "compila">
+    <target name = "compila" depends = "borrar">
         <mkdir dir = "${classdir}" />
         <javac srcdir = "${srcdir}" destdir = "${classdir}">
             <classpath refid = "classpath.app" />
@@ -30,8 +38,8 @@
 
     <target name = "borrar">
         <delete dir = "${classdir}" />
-        <delete file = "app.jar" />
-
+        <delete file = "${distdir}/app.jar" />
+        <delete dir = "${distdir}/resources" />
     </target>
 
 </project>
