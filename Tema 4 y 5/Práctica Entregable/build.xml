@@ -6,16 +6,12 @@
     <property name = "distdir" location = "dist" />
     <property name = "resourcesdir" location = "resources" />
 
-    <property name = "testsdir" location = "tests" />
-    <property name = "testsclassesdir" location = "classes/tests" />
-
 
     <path id = "classpath.app">
         <pathelement location = "${classdir}" />
         <pathelement location = "${srcdir}" />
         <pathelement location = "./lib/junit/junit-4.13.2.jar" />
         <pathelement location = "./lib/junit/hamcrest-core-1.3.jar" />
-        <pathelement location = "${testsdir}" />
     </path>
 
     <target name = "general" depends = "empaqueta">
@@ -36,21 +32,17 @@
         <javac srcdir = "${srcdir}" destdir = "${classdir}" includeantruntime="false">
             <classpath refid = "classpath.app" />
         </javac>
-        <javac srcdir = "${testsdir}" destdir = "${classdir}" includeantruntime="false">
-            <classpath refid = "classpath.app" />
-        </javac>
     </target>
 
-    <target name="test" depends="compila">
-    <junit printsummary="on" haltonfailure="yes" fork="true">
-        <classpath refid="classpath.app"/>
-        <formatter type="brief" usefile="false" />
-        <batchtest>
-            <fileset dir="${testsdir}" includes="**/Test*" />
-        </batchtest>
-    </junit>
-  </target>
-
+    <target name = "test" depends = "compila">
+        <junit printsummary = "on" haltonfailure = "yes" fork = "true">
+            <classpath refid = "classpath.app"/>
+            <formatter type = "brief" usefile = "false" />
+            <batchtest>
+                <fileset dir = "${srcdir}" includes = "**/Test*" />
+            </batchtest>
+        </junit>
+    </target>
 
     <target name = "borrar">
         <delete dir = "${classdir}" />
