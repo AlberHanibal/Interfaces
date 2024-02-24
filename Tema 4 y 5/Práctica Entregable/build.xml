@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="app" default="general" >
+
+    <property name = "srcdir" location = "src" />
+    <property name = "classdir" location = "classes" />
+    <property name = "distdir" location = "dist" />
+    <property name = "resourcesdir" location = "resources" />
+
+
+    <path id = "classpath.app">
+        <pathelement location = "${classdir}" />
+        <pathelement location = "${srcdir}" />
+        <pathelement location = "./lib/junit/junit-4.13.2.jar" />
+        <pathelement location = "./lib/junit/hamcrest-core-1.3.jar" />
+    </path>
+
+    <target name = "general" depends = "empaqueta">
+    </target>
+
+    <target name = "empaqueta" depends = "compila">
+    <mkdir dir = "${distdir}/resources" />
+    <copy todir="${distdir}/resources">
+        <fileset dir="${resourcesdir}">
+            <include name="datos.xml"/>
+        </fileset>
+    </copy>
+        <jar destfile = "${distdir}/app.jar" manifest = "${resourcesdir}/manifiesto.txt" basedir = "${classdir}" />
+    </target>
+
+    <target name = "compila" depends = "borrar">
+        <mkdir dir = "${classdir}" />
+        <javac srcdir = "${srcdir}" destdir = "${classdir}" includeantruntime="false">
+            <classpath refid = "classpath.app" />
+        </javac>
+    </target>
+
+    <target name = "test" depends = "compila">
+        <junit printsummary = "on" haltonfailure = "yes" fork = "true">
+            <classpath refid = "classpath.app"/>
+            <formatter type = "brief" usefile = "false" />
+            <batchtest>
+                <fileset dir = "${srcdir}" includes = "**/Test*" />
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name = "borrar">
+        <delete dir = "${classdir}" />
+        <delete file = "${distdir}/app.jar" />
+        <delete dir = "${distdir}/resources" />
+    </target>
+
+</project>
