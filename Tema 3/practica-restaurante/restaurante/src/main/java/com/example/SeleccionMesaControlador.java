@@ -16,6 +16,7 @@ public class SeleccionMesaControlador {
     @FXML
     private void seleccionarMesa(Event e) {
         Button boton = (Button) e.getSource();
+        String mesa = boton.getText();
         App.getComanda().setMesa(boton.getParent().getId() + ": " + boton.getText());
     }
 }
