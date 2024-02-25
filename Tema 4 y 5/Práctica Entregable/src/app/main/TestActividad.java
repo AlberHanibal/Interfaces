@@ -41,22 +41,45 @@ public class TestActividad {
 
     // parseaFecha
     @Test
-    public void testparseaFecha() {
-
+    public void testparseaFecha() throws ParseException {
+        String fecha;
+        Date date;
+        fecha = "02/08/1997";
+        date = df.parse("02/08/1997");
+        assertEquals(date, Actividad.parseaFecha(fecha));
+        assertNotEquals(date, Actividad.parseaFecha(fecha));
     }
 
 
     // getDuracionString
     @Test
-    public void testgetDuracionString() {
+    public void testgetDuracionString() throws ParseException {
+        Actividad act;
+        act = new Actividad(df.parse("01/01/2000"), 100, 500, 10, Actividad.CARRERA);
+        assertEquals("1 horas", act.getDuracionString(true));
+        assertEquals("1 horas 40 min", act.getDuracionString(false));
+        assertNotEquals("1 horas", act.getDuracionString(false));
+        assertNotEquals("0 horas 40 min", act.getDuracionString(false));
 
+        act = new Actividad(df.parse("01/01/2000"), 0, 500, 10, Actividad.CARRERA);
+        assertEquals("0 horas", act.getDuracionString(true));
+        assertNotEquals("0 horas 0 min", act.getDuracionString(false));
     }
 
 
     // getDistanciaString
     @Test
-    public void testgetDistanciaString() {
+    public void testgetDistanciaString() throws ParseException {
+        Actividad act;
+        act = new Actividad(df.parse("01/01/2000"), 10, 260, 10, Actividad.CARRERA);
+        assertEquals("0 km", act.getDistanciaString(true));
+        assertEquals("0 km 260 m", act.getDistanciaString(false));
+        assertNotEquals("260 m", act.getDistanciaString(false));
 
+        act = new Actividad(df.parse("01/01/2000"), 10, 2680, 10, Actividad.CARRERA);
+        assertEquals("2 km", act.getDistanciaString(true));
+        assertEquals("2 km 680 m", act.getDistanciaString(false));
+        assertNotEquals("2 km", act.getDistanciaString(false));
     }
 
 
@@ -82,7 +105,11 @@ public class TestActividad {
         Actividad act;
         act = new Actividad(df.parse("01/01/2000"), 10, 10, 10, Actividad.NATACION);
         assertNotEquals(10, act.getRitmo(), 0);
-        // hay que calcularlo
-            // (float)dur/((float)dis/1000)
+        assertEquals(1000, act.getRitmo(), 0);
+
+        act = new Actividad(df.parse("01/01/2000"), 10, 100, 10, Actividad.NATACION);
+        assertNotEquals(128, act.getRitmo(), 0);
+        assertEquals(100, act.getRitmo(), 0);
+        // dis != 0
     }
 }
