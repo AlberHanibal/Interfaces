@@ -6,7 +6,6 @@
     <property name = "distdir" location = "dist" />
     <property name = "resourcesdir" location = "resources" />
 
-
     <path id = "classpath.app">
         <pathelement location = "${classdir}" />
         <pathelement location = "${srcdir}" />
@@ -14,7 +13,7 @@
         <pathelement location = "./lib/junit/hamcrest-core-1.3.jar" />
     </path>
 
-    <target name = "general" depends = "empaqueta">
+    <target name = "general" depends = "doc">
     </target>
 
     <target name = "empaqueta" depends = "compila">
@@ -24,7 +23,7 @@
             <include name="datos.xml"/>
         </fileset>
     </copy>
-        <jar destfile = "${distdir}/app.jar" manifest = "${resourcesdir}/manifiesto.txt" basedir = "${classdir}" />
+        <jar destfile = "${distdir}/aplicacion.jar" manifest = "manifiesto.txt" basedir = "${classdir}" />
     </target>
 
     <target name = "compila" depends = "borrar">
@@ -44,10 +43,27 @@
         </junit>
     </target>
 
+    <target name = "doc" depends = "empaqueta">
+        <mkdir dir = "${distdir}/man" />
+        <copy todir = "${distdir}/man">
+            <fileset dir = "doc">
+                <include name = "**.PNG"/>
+            </fileset>
+        </copy>
+        <exec executable = "pandoc">
+            <arg value = "-s"/>
+            <arg line = "doc/manual.md"/>
+            <arg value = "--toc"/>
+            <arg value = "-o"/>
+            <arg value = "${distdir}/man/manual.html"/>
+        </exec>
+    </target>
+
     <target name = "borrar">
         <delete dir = "${classdir}" />
         <delete file = "${distdir}/app.jar" />
         <delete dir = "${distdir}/resources" />
+        <delete dir = "${distdir}/man" />
     </target>
 
 </project>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>manual</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#manual-deporapp" id="toc-manual-deporapp">Manual
+DeporApp</a>
+<ul>
+<li><a href="#actividades" id="toc-actividades">Actividades</a>
+<ul>
+<li><a href="#crear-nueva-actividad"
+id="toc-crear-nueva-actividad">Crear nueva actividad</a></li>
+<li><a href="#borrar-actividad" id="toc-borrar-actividad">Borrar
+actividad</a></li>
+</ul></li>
+<li><a href="#objetivos" id="toc-objetivos">Objetivos</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="manual-deporapp">Manual DeporApp</h1>
+<p><strong>DeporApp</strong> es una aplicación que registra los datos de
+tus salidas deportivas para que puedas ver tus progresos.</p>
+<hr />
+<h2 id="actividades">Actividades</h2>
+<p><img src="./principal.PNG" title="Principal" /></p>
+<p>Aquí nos muestra una tabla con la información de las actividades que
+hemos ido guardando. La información que muestra es la siguiente:</p>
+<ul>
+<li><strong>Fecha</strong>: indica la fecha en la que hiciste esa
+actividad.</li>
+<li><strong>Duración</strong>: tiempo (en horas y minutos) que duró esa
+actividad.</li>
+<li><strong>Distancia</strong>: distancia recorrida (en kilómetros y
+metros).</li>
+<li><strong>Deporte</strong>: tipo de actividad (ciclismo, natación o
+carrera).</li>
+<li><strong>PPM</strong>: pulsaciones por minuto de media.</li>
+<li><strong>Ritmo</strong>: media de distancia por tiempo.</li>
+</ul>
+<p>A la derecha de la tabla nos muestra las estadísticas totales de las
+actividades registradas.</p>
+<hr />
+<h3 id="crear-nueva-actividad">Crear nueva actividad</h3>
+<p><img src="./crea.PNG" title="Crear nueva actividad" /></p>
+<p>Para crear una nueva actividad hay que seguir los siguientes
+pasos.</p>
+<ol type="1">
+<li>Pulsar al botón de ‘Crea’ situado abajo a la derecha.</li>
+<li>Rellenar los campos de la nueva ventana.</li>
+<li>Seleccionar el deporte.</li>
+<li>Pulsar al botón de ‘Guardar’ de la ventana.</li>
+<li>Se creará la nueva actividad y habrá que pulsar el botón ‘Guarda’
+para finalizar.</li>
+</ol>
+<hr />
+<h3 id="borrar-actividad">Borrar actividad</h3>
+<p>Para borrar una actividad por si nos hemos confundido o no la
+queremos tener registrada hay que hacer lo siguiente:</p>
+<ol type="1">
+<li>Seleccionar una actividad (se pondrá en azul).</li>
+<li>Pulsar el botón ‘Borra’.</li>
+</ol>
+<hr />
+<h2 id="objetivos">Objetivos</h2>
+<p>Vemos unas gráficas con barras que nos muestran el camino que
+llevamos hacia nuestros distintos objetivos de las tres modalidades de
+deporte.</p>
+<p>El objetivo de ciclismo son 80 km.<br />
+El objetivo de carrera son 50 km.<br />
+El objetivo de natación son 40 km.<br />
+</p>
+<p><img src="./objetivos.PNG" title="Objetivos" /></p>
+</body>
+</html>
